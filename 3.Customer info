@@ -1,0 +1,265 @@
+*******************************************************************************************************************************************
+/*Customer Information
+bookmark_border
+subject Codingcasino 100 points
+DESCRIPTION
+Problem Statement - Customer Information
+Create a class named SimpleDate with the below private instance variables
+
+
+
+day:int
+month:int
+year:int
+create constructor with parameter sequence (day,month,year)
+create Getters
+create setDate method with 3 parameters for changing date values
+setDate(int, int, int) : void //parameter sequence (day,month,year)
+Override toString() method to return String as per below format
+x/y/z
+where x is day, y is month and z is year ex. 1/1/2018
+
+
+
+create a static method as below to validate date. It should return false, if date is not valid as per given rules
+validateDate(SimpleDate):boolean
+Rules for date validation
+
+
+
+Year cannot be less than 2000
+month should be from 1 to 12
+day should be 30 or 31 based on the month
+for February, days are always 28 (No leap year validation required)
+Create a class named Address with the below private instance variable
+
+
+
+area:String
+city:String
+create constructor with parameter sequence (area,city)
+create getters and setters
+Override toString() method to return String as per below format
+xx, yy
+where xx is area and yy is city
+
+Create a class named Customer with the below private instance variables
+
+
+
+custId:int
+name:int
+address:Address
+registrationDate:SimpleDate
+create constructor with parameter sequence(custId,name,address,registrationDate). If registrationDate is invalid, set it to null
+create getter and setter for address and registrationDate. If registrationDate is invalid, set it to null
+Override toString to return String as per below format
+Id : xxx, Name : xxxx
+Address : xxxx, xxxx
+Registered on : xxxx
+If the address or registration date is null, its value should be given as "Unknown"
+
+
+
+Id : xxx, Name : xxxx
+Address : Unknown
+Registered on : Unknown 
+In the class Source, do the following
+
+In the main method, - Accept the inputs using Console as shown in the Example section - Create object of Customer with aggregated objects of address and registration date - print the Customer details as shown in Example section
+
+
+
+Example
+Sample Input:
+101 john			//id name
+HSR Bangalore			//area city
+1 1 2019			//day month year
+
+Expected Output:
+Id : 101, Name : john
+Address : HSR, Bangalore
+Registered on : 1/1/2019
+Sample Input:
+101 Dave
+BTM Bangalore
+30 1 1900
+
+Expected Output:
+Id : 101, Name : Dave
+Address : BTM, Bangalore
+Registered on : Unknown*/
+****************************************************************************************************************************************************************************
+//CODE
+
+import java.util.Scanner;
+
+class SimpleDate {
+   private int day;
+   private int month;
+   private int year;
+
+   SimpleDate(int day, int month, int year) {
+      this.day = day;
+      this.month = month;
+      this.year = year;
+      validateDate(this);
+   }
+
+   public int getDay() {
+      return day;
+   }
+
+   public int getMonth() {
+      return month;
+   }
+
+   public int getYear() {
+      return year;
+   }
+
+   public void setDate(int day, int month, int year) {
+      this.day = day;
+      this.month = month;
+      this.year = year;
+   }
+
+   @Override
+   public String toString() {
+      return (day + "/" + month + "/" + year);
+   }
+
+   public static boolean isFebruary(int month) {
+      return month == 2;
+   }
+
+   public static boolean isValidDay(int month, int day) {
+      if (month == 4 || month == 6 || month == 9 || month == 11) {
+         if (day >= 1 && day <= 30) {
+            return true;
+         }
+      } else {
+         if (day >= 1 && day <= 31) {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   public static boolean validateDate(SimpleDate sd) {
+      int year = sd.getYear();
+      int month = sd.getMonth();
+      int day = sd.getDay();
+      boolean isFebruary = isFebruary(month);
+      if (year > 2000 && month >= 1 && month <= 12) {
+         if (isFebruary) {
+            if (day >= 1 && day <= 28) {
+               return true;
+            }
+         } else if (isValidDay(month, day)) {
+            return true;
+         }
+
+      }
+      return false;
+   }
+}
+
+class Address {
+   private String area;
+   private String city;
+
+   Address(String area, String city) {
+      this.area = area;
+      this.city = city;
+   }
+
+   public String getArea() {
+      return area;
+   }
+
+   public String getCity() {
+      return city;
+   }
+
+   public void setArea(String area) {
+      this.area = area;
+   }
+
+   public void setCity(String city) {
+      this.city = city;
+   }
+
+   @Override
+   public String toString() {
+      return (area + ", " + city);
+   }
+}
+
+class Customer {
+   private int custId;
+   private String name;
+   private Address address;
+   private SimpleDate registrationDate;
+
+   Customer(int custId, String name, Address address, SimpleDate registrationDate) {
+      this.address = address;
+      this.custId = custId;
+      this.name = name;
+      this.registrationDate = registrationDate;
+   }
+
+   public Address getAddress() {
+      return address;
+   }
+
+   public void setAddress(Address address) {
+      this.address = address;
+   }
+
+   public SimpleDate getRegistrationDate() {
+      return registrationDate;
+   }
+
+   public void setRegistrationDate(SimpleDate registrationDate) {
+      this.registrationDate = registrationDate;
+   }
+
+   @Override
+   public String toString() {
+      String addr = "";
+      if (this.address == null) {
+         addr = "Unknown";
+      } else {
+         addr = this.address.toString();
+      }
+      String reg = "";
+      if (this.registrationDate == null) {
+         reg = "Unknown";
+      } else {
+         reg = this.registrationDate.toString();
+      }
+      String result = String.format("\nId : %d, Name : %s\nAddress : %s\nRegistered on : %s", custId, name, addr,
+            reg);
+      return (result);
+   }
+
+}
+
+/**
+ * Source
+ */
+public class Source {
+
+   public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+      String first[] = scanner.nextLine().split(" ");
+      String second[] = scanner.nextLine().split(" ");
+      String third[] = scanner.nextLine().split(" ");
+      Address address = new Address(second[0], second[1]);
+      SimpleDate simpleDate = new SimpleDate(Integer.parseInt(third[0]), Integer.parseInt(third[1]),
+            Integer.parseInt(third[2]));
+      Customer customer = new Customer(Integer.parseInt(first[0]), first[1], address, simpleDate);
+      System.out.println(customer);
+   }
+}
