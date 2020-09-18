@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DESCRIPTION
+Problem Statement: Message Encryption
+In the class Source create the following public static method:
+
+
+
+ encrypt(String message): String	 
+The input message String to the method should be encrypted as per the below rules. encrypted message should be returned back.
+message should be converted to lower case
+a and e should be replaced with each other
+o and u should be replaced with each other
+i should be replaced with ! and space should be replaced with +
+In case of Consonant, It should be replaced with next immediate consonant
+In case of digit, it should be replaced with next digit
+z should be replaced with b and 0 with 1
+Assume that the input string is alphanumeric without special characters
+Do the following in the main method of Source
+
+
+
+Accept a message from the console and display the encrypted message
+Example
+Sample Input:
+good Morning
+
+Expected Output:
+huuf+nusp!ph
+Sample Input:
+silence please
+
+Expected Output:
+t!mapda+qmaeta
+Sample Input:
+call at 4pm
+
+Expected Output:
+demm+ev+5qn
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+import java.util.*;
+class Source{
+    public static String encrypt(String message){
+        message = message.toLowerCase();
+        char arr[] = message.toCharArray();//String to Array
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]=='a'){
+                arr[i] = 'e';//Replace a with e
+            }
+            else if(arr[i]=='e'){
+                arr[i] = 'a';//Replace e with a
+            }
+            else if(arr[i]=='o'){
+                arr[i] = 'u';//Replace o with u
+            }
+            else if(arr[i]=='u'){
+                arr[i] = 'o';//Replace u with o
+            }
+            else if(arr[i]=='i'){
+                arr[i] = '!';//Replace i with !
+            }
+            else if(arr[i]==' '){
+                arr[i] = '+';//Replace space with +
+            }
+            else if(arr[i]=='z'){
+
+                arr[i] = 'b';//Replace z with b
+            }
+            else if(arr[i]=='d'){
+                arr[i] = 'f';//Replace d with f
+            }
+            else if(arr[i]=='h'){
+                arr[i] = 'j';//Replace h with j
+            }
+            else if(arr[i]=='n'){
+                arr[i] = 'p';//Replace n with p
+            }
+            else if(arr[i]=='t'){
+                arr[i] = 'v';//Replace t with v
+            }
+            else if(arr[i]=='9'){
+                arr[i] = '0';//Replace 9 with 0
+            }
+            else if(arr[i]>=97 && arr[i]<=122)
+            {
+                arr[i]+=1;
+            }
+            else if(arr[i]>=48 && arr[i]<=57)
+            {
+                arr[i]+=1;
+            }
+        }
+        String result = "";
+        for(int i=0;i<arr.length;i++)
+        {
+            result+=arr[i];
+        }
+        return result;
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        String message = sc.nextLine();
+        String result = encrypt(message);
+        System.out.println(result);
+    }
+}
