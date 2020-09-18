@@ -1,0 +1,53 @@
+/*DESCRIPTION
+Problem Statement: Day of Date
+In the class Source create the following public static method:
+
+
+
+ getDayOfDate(String): String	 
+The input String to the method should be date in dd/mm/yyyy format
+Method should return the day for the input date
+Assume that input dates are valid as per format
+Do the following in the main method of Source class
+
+
+
+Accept date string from the console
+Display the day for that date
+Example
+Sample Input:
+14/1/2019
+
+Expected Output:
+Monday
+Sample Input:
+12/2/2019
+
+Expected Output:
+Tuesday*/
+
+//CODE
+
+import java.util.*;
+import java.text.*;
+public class Source {
+    public static void main(String[] args) throws ParseException {
+        //CODE HERE
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+
+        String day = getDayOfDate(str);
+        System.out.println(day);
+    }
+
+    public static String getDayOfDate(String date) throws ParseException {
+
+        //CODE HERE
+        Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        /*SimpleDateFormat is subclass of DateFormat class.
+        Used for format and validate date*/
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");//EEEE used for full name of day
+        String stringDate = sdf.format(date1);
+        return stringDate;
+    }
+}
