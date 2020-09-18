@@ -1,0 +1,87 @@
+***********************************************************************************************************************************************************************
+DESCRIPTION
+Problem Statement: Count Unique Characters
+In the class named Source, create the following public static method:
+
+
+
+ getUniqueCharacterCount(String) : int	 
+Count the number of unique characters in the input string and return the count.
+return -1 in case of no unique characters
+space should not be considered in the count
+character comparison should be case insensitive
+Do the following in the main method of Source class
+
+
+
+Accept a String from the console
+If the String contains 'n' unique characters, print n unique character/s
+If the String contains no unique characters, print No unique character/s
+Example
+Sample Input:
+good
+
+Expected Output:
+2 unique character/s
+Sample Input:
+pepper spray
+
+Expected Output:
+3 unique character/s
+Sample Input:
+Mama
+
+Expected Output:
+No unique character/s
+
+*************************************************************************************************************************************************************************
+
+
+import java.util.Scanner;
+
+public class Source {
+    public static int getUniqueCharacterCount(String str){
+        str = str.replaceAll("\\s", "");//replace whitespaces
+        str = str.toLowerCase();
+
+        int count=0;
+
+        for(int i=0;i<str.length();i++){
+            boolean flag = false;
+            for(int j=0;j<str.length();j++){
+                if(str.charAt(i)==str.charAt(j) && i!=j)//Comaparing
+                {
+                flag = true;
+                break;
+                }
+            }
+            if(!flag)
+            {
+
+            count++;
+            }
+        }
+        if(count>0)
+        {
+
+        return count;
+        }
+        return -1;
+    }
+public static void main(String[] args) {
+//write code here
+    Scanner sc = new Scanner(System.in);
+    String word = sc.nextLine();
+    int n = getUniqueCharacterCount(word);
+    if(n==-1)
+    {
+        System.out.println("No unique character/s");
+    }
+    else{
+        System.out.println(n+" unique character/s");
+    }
+}
+
+//write method here
+
+}
